@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SmartHomeMQTT</string>
+    <string name="username">SmartHomeMQTT.username</string>
+    <string name="password">SmartHomeMQTT.password</string>
+    <string name="checkbox">SmartHomeMQTT.checkbox</string>
 </resources>

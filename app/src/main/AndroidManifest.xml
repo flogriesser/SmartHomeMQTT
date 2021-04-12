@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".AddDeviceActivity" />
         <activity android:name=".HomeMainActivity" />
+        <activity android:name=".CommunicationActivity"/>
     </application>
 
 </manifest>
