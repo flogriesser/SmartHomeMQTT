@@ -30,7 +30,7 @@ public class HomeMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_main);
 
-        dashboard_rec_view = (RecyclerView)findViewById(R.id.dashboard_rec_view);
+        dashboard_rec_view = (RecyclerView)findViewById(R.id.connectionStatus);
         /*
         ItemList = new ArrayList<String>();
         ItemList.add("Device 1");
@@ -38,8 +38,8 @@ public class HomeMainActivity extends AppCompatActivity {
         ItemList.add("Device 3");
         */
         ItemList = new ArrayList<Item>();
-        ItemList.add(new Item("RasperryPi", "LED 1"));
-        ItemList.add(new Item("RasperryPi", "LED 2"));
+        //ItemList.add(new Item("RasperryPi", "LED1"));
+        //ItemList.add(new Item("RasperryPi", "LED2"));
 
 
         dashboard_rec_view.setHasFixedSize(true);

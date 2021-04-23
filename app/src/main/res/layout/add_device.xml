@@ -32,34 +32,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/group_text" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="127dp"
-        android:layout_height="93dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/device_text">
-
-        <RadioButton
-            android:id="@+id/button_active"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="active" />
-
-        <RadioButton
-            android:id="@+id/button_passive"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="passive" />
-    </RadioGroup>
-
     <Button
         android:id="@+id/save_device_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="88dp"
         android:text="Save Device"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

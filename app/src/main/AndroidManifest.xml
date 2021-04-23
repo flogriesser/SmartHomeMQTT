@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smarthomemqtt">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeMQTT">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -18,6 +25,11 @@
         <activity android:name=".AddDeviceActivity" />
         <activity android:name=".HomeMainActivity" />
         <activity android:name=".CommunicationActivity"/>
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service
+            android:name=".MqttMessageService"
+            android:enabled="true"
+            android:exported="false"></service>
     </application>
 
 </manifest>

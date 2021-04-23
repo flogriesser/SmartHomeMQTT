@@ -8,7 +8,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dashboard_rec_view"
+        android:id="@+id/connectionStatus"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="-48dp"
@@ -20,9 +20,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Add Device"
-        app:layout_constraintBottom_toBottomOf="@+id/dashboard_rec_view"
+        app:layout_constraintBottom_toBottomOf="@+id/connectionStatus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
