@@ -25,5 +25,9 @@ public class Item {
     public void setDevice(@NonNull final String device_str) {
         this.device_str = device_str;
     }
+
+    public String toString() {
+        return group_str;
+    }
 }
 

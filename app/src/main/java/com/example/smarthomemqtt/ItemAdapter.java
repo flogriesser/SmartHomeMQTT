@@ -2,6 +2,7 @@ package com.example.smarthomemqtt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import static java.sql.DriverManager.println;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 
@@ -48,6 +51,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
         textView.setText(item.getGroup());
         TextView textView2 = holder.device_text;
         textView2.setText(item.getDevice());
+        println("Den kleine Position: " + position);
 
         // OnClickListener
         edit_item_button.setOnClickListener(new View.OnClickListener() {

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Constants.clientid = "mqtt" + i1;
 
 
-
+        // TODO: scrollable > login site (text )
         if(Constants.pahoMqttClient.mqttAndroidClient.isConnected() ) {
             //Disconnect and Reconnect to  Broker
             try {
@@ -98,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /*TODO This is maybe obsolete. The server needs to much time to set the state to connected*/
-        if(Constants.pahoMqttClient.mqttAndroidClient.isConnected()){
+        // Login without Mqtt connection for developer
+        if(Constants.pahoMqttClient.mqttAndroidClient.isConnected() || (username.equals("pi") && password.equals("pi"))){
             Intent intent = new Intent(MainActivity.this, HomeMainActivity.class);
             startActivity(intent);
 
