@@ -15,15 +15,14 @@ import java.util.ArrayList;
 
 import static java.sql.DriverManager.println;
 
-public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
+public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
-    //ArrayList<String> ItemList;
-    ArrayList<Item> ItemList;
+    public ArrayList<Item> ItemList;
 
     public Button edit_item_button;
-    private Context mContext;
+    public Context mContext;
 
-    //public ItemAdapter(ArrayList<String> itemList) {
+
     public ItemAdapter(Context context, ArrayList<Item> itemList) {
         ItemList = itemList;
         mContext = context;
@@ -31,12 +30,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 
     @Override
     public ItemAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.temp_layout, parent, false);
-        //return new ViewHolder(view);
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        //View itemView = inflater.inflate(R.layout.temp_layout, parent, false);
         View itemView = inflater.inflate(R.layout.dashboard_item, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
@@ -45,13 +41,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        //holder.group_text.setText(ItemList.get(position));
         Item item = ItemList.get(position);
         TextView textView = holder.group_text;
         textView.setText(item.getGroup());
         TextView textView2 = holder.device_text;
         textView2.setText(item.getDevice());
-        println("Den kleine Position: " + position);
 
         // OnClickListener
         edit_item_button.setOnClickListener(new View.OnClickListener() {
@@ -70,13 +64,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>{
         return ItemList.size();
     }
 
+    public void updateItemList(ArrayList<Item> newList){
+        this.ItemList = newList;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView group_text;
         public TextView device_text;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            //group_text = (TextView) itemView.findViewById(R.id.random_name);
             group_text = (TextView) itemView.findViewById(R.id.group_name);
             device_text = (TextView) itemView.findViewById(R.id.device_name);
             edit_item_button = (Button) itemView.findViewById(R.id.edit_item_button);

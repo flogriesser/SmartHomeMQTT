@@ -1,7 +1,5 @@
 package com.example.smarthomemqtt;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +7,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,18 +18,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.acl.Group;
 import java.util.ArrayList;
+
+import static java.security.AccessController.getContext;
 
 public class HomeMainActivity extends AppCompatActivity {
 
 
-    ArrayList<Item> ItemList, ShortItemList;
+    ArrayList<Item> ItemList, UpdatedItemList;
     ArrayList<String> GroupList;
 
     RecyclerView dashboard_rec_view;
     RecyclerView.LayoutManager layout_manager;
-    RecyclerView.Adapter iadapter;
+    ItemAdapter RecyclerViewAdapter;
     Spinner spinner;
 
     @Override
@@ -45,6 +43,8 @@ public class HomeMainActivity extends AppCompatActivity {
 
         ItemList = new ArrayList<Item>();
         GroupList = new ArrayList<String>();
+        GroupList.add("All");
+
 
         // fill ItemList with data from file
         FileInputStream fis = null;
@@ -75,28 +75,32 @@ public class HomeMainActivity extends AppCompatActivity {
                 }
             }
         }
-
-        ShortItemList = ItemList;
+        RecyclerViewAdapter = new ItemAdapter(this, ItemList);
         dashboard_rec_view.setHasFixedSize(true);
         layout_manager = new LinearLayoutManager(this);
-        iadapter = new ItemAdapter(this, ShortItemList);
         dashboard_rec_view.setLayoutManager(layout_manager);
-        dashboard_rec_view.setAdapter(iadapter);
+        dashboard_rec_view.setAdapter(RecyclerViewAdapter);
+        dashboard_rec_view.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
 
-        ArrayAdapter<String> aadapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, GroupList);
-        aadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(aadapter);
+        ArrayAdapter<String> StringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, GroupList);
+        StringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(StringArrayAdapter);
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                ShortItemList = new ArrayList<Item>();
-                for (Item i:ItemList) {
-                    if(i.getGroup().equals(parent.getSelectedItem().toString())){
-                        ShortItemList.add(i);
+                UpdatedItemList = new ArrayList<Item>();
+                if (parent.getSelectedItem().toString().equals("All")) {
+                    RecyclerViewAdapter.updateItemList(ItemList);
+                } else {
+                    for (Item i : ItemList) {
+                        if (i.getGroup().equals(parent.getSelectedItem().toString())) {
+                            UpdatedItemList.add(i);
+                        }
                     }
+                    RecyclerViewAdapter.updateItemList(UpdatedItemList);
                 }
             }
 

@@ -14,43 +14,68 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/comm_device"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.685" />
+        app:layout_constraintVertical_bias="0.895" />
 
     <TextView
         android:id="@+id/comm_device"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="388dp"
         android:text="TextView"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.292" />
 
     <EditText
         android:id="@+id/comm_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
         android:hint="MQTT Message"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comm_device" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.707" />
 
     <Button
         android:id="@+id/send_msg_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comm_message"
-        app:layout_constraintVertical_bias="0.212" />
+        app:layout_constraintVertical_bias="0.174" />
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="BACK TO DASHBOARD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/delete_device_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE DEVICE"
+        app:layout_constraintBottom_toTopOf="@+id/comm_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/comm_device"
+        app:layout_constraintVertical_bias="0.115" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

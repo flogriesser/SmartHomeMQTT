@@ -18,6 +18,7 @@ public class Constants {
     public static boolean LoggedIn;
 
     public static final String FILENAME = "added_devices.txt";
+    public static final String TEMP_FILENAME = "temp_devices.txt";
     public static final String MQTT_BROKER_URL = "app_startup_placeholder";
     public static final String MQTT_CLIENT_UN = "app_startup_placeholder";
     public static final String MQTT_CLIENT_PW = "app_startup_placeholder";
