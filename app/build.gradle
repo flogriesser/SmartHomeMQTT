@@ -32,7 +32,6 @@ repositories {
     maven {
         url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
         }
-
 }
 
 dependencies {

@@ -113,7 +113,8 @@ public class HomeMainActivity extends AppCompatActivity {
         add_device_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeMainActivity.this, AddDeviceActivity.class);
+                //Intent intent = new Intent(HomeMainActivity.this, AddDeviceActivity.class);
+                Intent intent = new Intent(HomeMainActivity.this, DeviceChoice.class);
                 startActivity(intent);
             }
         });

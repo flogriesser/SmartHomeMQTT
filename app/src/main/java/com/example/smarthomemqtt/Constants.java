@@ -4,9 +4,6 @@ import org.eclipse.paho.android.service.MqttAndroidClient;
 
 import java.util.Timer;
 
-/**
- * Created by brijesh on 20/4/17.
- */
 
 public class Constants {
 

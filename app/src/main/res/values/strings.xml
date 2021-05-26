@@ -5,4 +5,13 @@
     <string name="username">SmartHomeMQTT.username</string>
     <string name="password">SmartHomeMQTT.password</string>
     <string name="checkbox">SmartHomeMQTT.checkbox</string>
+    <string name="ControlDeviceText">Add your Control Device:</string>
+    <string name="save_device_button">Save Device</string>
+    <string name="group_text">Group</string>
+    <string name="device_text">Device</string>
+    <string name="deviceQuestion">What kind of device do you want to add?</string>
+    <string name="save_ControlDeviceButton">Control Device</string>
+    <string name="ownDeviceButton">Own Device</string>
+    <string name="saveDevice">Save Device</string>
+
 </resources>
