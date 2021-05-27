@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -156,6 +157,9 @@ public class MainActivity extends AppCompatActivity {
 
         checkSharedPreferences();
 
+        //Create listener for MQTT messages.
+        mqttCallback();
+
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,8 +167,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Create listener for MQTT messages.
-        mqttCallback();
 
 
 
@@ -254,6 +256,9 @@ public class MainActivity extends AppCompatActivity {
                     tvMessage.append( msg);
                 }
                  */
+                    //Add custom message handling here (if topic = "mycustomtopic1")
+                Toast.makeText(getApplicationContext(), "Message arrived", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

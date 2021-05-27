@@ -53,7 +53,6 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
 
             /*TODO Publish Topic here*/
             String MSG = comm_message.getText().toString().trim();
-            ;
             String Topic = Group + "/" + Device;
             try {
                 Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 1, Topic);
@@ -63,7 +62,7 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            Toast.makeText(CommunicationActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(CommunicationActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
         }
         else if(v.getId() == R.id.delete_device_button){
             //delete item and write new data to file

@@ -22,11 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddDeviceActivity" />
+        <activity android:name=".AddDevices.AddDeviceActivity" />
         <activity android:name=".HomeMainActivity" />
         <activity android:name=".CommunicationActivity"/>
-        <activity android:name=".AddControlDevice"/>
-        <activity android:name=".DeviceChoice"/>
+        <activity android:name=".AddDevices.AddControlDevice"/>
+        <activity android:name=".AddDevices.DeviceChoice"/>
+        <activity android:name=".AddDevices.AddSocket"/>
         <service android:name="org.eclipse.paho.android.service.MqttService" />
     </application>
 

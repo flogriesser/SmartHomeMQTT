@@ -10,8 +10,9 @@
     <string name="group_text">Group</string>
     <string name="device_text">Device</string>
     <string name="deviceQuestion">What kind of device do you want to add?</string>
-    <string name="save_ControlDeviceButton">Control Device</string>
+    <string name="save_ControlDeviceButton">New Control Device</string>
     <string name="ownDeviceButton">Own Device</string>
     <string name="saveDevice">Save Device</string>
+    <string name="saveDeviceToControllDevice">Add 433 MHz Socket to Control Device</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.smarthomemqtt;
+package com.example.smarthomemqtt.AddDevices;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.smarthomemqtt.R;
 
 public class DeviceChoice extends AppCompatActivity implements View.OnClickListener{
 
@@ -18,6 +20,8 @@ public class DeviceChoice extends AppCompatActivity implements View.OnClickListe
         save_device_button.setOnClickListener(this); // calling onClick() method
         Button save_ControlDeviceButton = (Button) findViewById(R.id.save_ControlDeviceButton);
         save_ControlDeviceButton.setOnClickListener(this);
+        Button saveDeviceToControlDevice = (Button) findViewById(R.id.saveDeviceToControllDevice);
+        saveDeviceToControlDevice.setOnClickListener(this);
     }
 
         @Override
@@ -30,6 +34,10 @@ public class DeviceChoice extends AppCompatActivity implements View.OnClickListe
                 case R.id.save_ControlDeviceButton:
                     Intent intent2 = new Intent(DeviceChoice.this, AddControlDevice.class);
                     startActivity(intent2);
+                    break;
+                case R.id.saveDeviceToControllDevice:
+                    Intent intent3 = new Intent(DeviceChoice.this, AddSocket.class);
+                    startActivity(intent3);
                     break;
                 default:
                     break;

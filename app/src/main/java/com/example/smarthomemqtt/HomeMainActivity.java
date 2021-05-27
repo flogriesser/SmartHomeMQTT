@@ -13,14 +13,16 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smarthomemqtt.AddDevices.DeviceChoice;
+
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class HomeMainActivity extends AppCompatActivity {
 
@@ -55,7 +57,7 @@ public class HomeMainActivity extends AppCompatActivity {
             String text;
             while ((text = br.readLine()) != null) {
                 String[] line = text.split(",");
-                if(line.length == 2){
+                if(line.length == 2 && !line[1].equals(Constants.ControlDeviceSettings)){
                     ItemList.add(new Item(line[0], line[1]));
                     if(!(GroupList.contains(line[0]))){
                         GroupList.add(line[0]);
@@ -86,6 +88,12 @@ public class HomeMainActivity extends AppCompatActivity {
         ArrayAdapter<String> StringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, GroupList);
         StringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(StringArrayAdapter);
+
+        try {
+            Constants.pahoMqttClient.subscribe(Constants.client, "control-device/settings", (int) 1);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
