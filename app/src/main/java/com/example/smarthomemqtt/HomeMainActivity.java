@@ -2,18 +2,21 @@ package com.example.smarthomemqtt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smarthomemqtt.AddDevices.DeviceChoice;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
 
@@ -116,8 +119,8 @@ public class HomeMainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-
-        Button add_device_button = (Button) findViewById(R.id.add_device_button);
+/*
+        Button add_device_button = (Button) findViewById(R.id.addDevice);
         add_device_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +129,30 @@ public class HomeMainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        */
+
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.add_NEW_Device:
+                        Intent menuIntent = new Intent(HomeMainActivity.this, DeviceChoice.class);
+                        startActivity(menuIntent);
+                        break;
+                    case R.id.Notification:
+                        Intent Notification = new Intent(HomeMainActivity.this, DeviceChoice.class);
+                        startActivity(Notification);
+                        break;
+                }
+                return false;
+            }
+        });
+        
+        
+        
     }
 
 }
