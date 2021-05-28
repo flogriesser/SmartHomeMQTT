@@ -2,14 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/add_NEW_Device"
+        android:id="@+id/Home"
         android:enabled="true"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Add Device" />
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Home" />
 
     <item
         android:id="@+id/Notification"
         android:enabled="true"
         android:icon="@android:drawable/ic_dialog_email"
         android:title="Notification" />
+
+    <item
+        android:id="@+id/add_NEW_Device"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Add Device" />
 </menu>

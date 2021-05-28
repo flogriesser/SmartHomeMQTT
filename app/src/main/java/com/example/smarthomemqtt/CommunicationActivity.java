@@ -2,25 +2,26 @@ package com.example.smarthomemqtt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.smarthomemqtt.AddDevices.DeviceChoice;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -33,15 +34,36 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.communication);
-        String Group = getGroupName();
-        String Device = getDeviceName();
 
         Button send_msg_button = (Button) findViewById(R.id.send_msg_button);
-        Button back_button = (Button) findViewById(R.id.back_button);
         Button delete_device_button = (Button) findViewById(R.id.delete_device_button);
         send_msg_button.setOnClickListener(this);
-        back_button.setOnClickListener(this);
         delete_device_button.setOnClickListener(this);
+
+
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.add_NEW_Device:
+                        Intent menuIntent = new Intent(CommunicationActivity.this, DeviceChoice.class);
+                        startActivity(menuIntent);
+                        break;
+                    case R.id.Notification:
+                        Intent Notification = new Intent(CommunicationActivity.this, NotificationMessages.class);
+                        startActivity(Notification);
+                        break;
+                    case R.id.Home:
+                        Intent Home = new Intent(CommunicationActivity.this, HomeMainActivity.class);
+                        startActivity(Home);
+                        break;
+                }
+                return false;
+            }
+        });
     }
     @Override
     public void onClick(View v) {
@@ -117,10 +139,6 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
                     }
                 }
             }
-            Intent intent = new Intent(CommunicationActivity.this, HomeMainActivity.class);
-            startActivity(intent);
-        }
-        else if(v.getId() == R.id.back_button){
             Intent intent = new Intent(CommunicationActivity.this, HomeMainActivity.class);
             startActivity(intent);
         }

@@ -143,7 +143,7 @@ public class HomeMainActivity extends AppCompatActivity {
                         startActivity(menuIntent);
                         break;
                     case R.id.Notification:
-                        Intent Notification = new Intent(HomeMainActivity.this, DeviceChoice.class);
+                        Intent Notification = new Intent(HomeMainActivity.this, NotificationMessages.class);
                         startActivity(Notification);
                         break;
                 }

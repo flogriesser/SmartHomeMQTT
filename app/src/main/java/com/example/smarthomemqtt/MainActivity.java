@@ -28,12 +28,6 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    /*
-    private MqttAndroidClient client;
-    private PahoMqttClient pahoMqttClient;
-    private String clientid = "";
-    private Timer myTimer;
-*/
 
     EditText broker_text, username_text, password_text;
     Button login_button;

@@ -8,8 +8,19 @@
         android:id="@+id/saveDeviceToControllDevice"
         android:layout_width="200dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="180dp"
         android:text="@string/saveDeviceToControllDevice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/save_ControlDeviceButton"
+        android:layout_width="200dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="248dp"
+        android:text="@string/save_ControlDeviceButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -19,22 +30,11 @@
         android:id="@+id/ownDeviceButton"
         android:layout_width="200dp"
         android:layout_height="47dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginBottom="120dp"
         android:text="@string/ownDeviceButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/save_ControlDeviceButton"
-        android:layout_width="200dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="180dp"
-        android:text="@string/save_ControlDeviceButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -50,5 +50,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
