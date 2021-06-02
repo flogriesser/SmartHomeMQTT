@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 public class HomeMainActivity extends AppCompatActivity {
 
-
     ArrayList<Item> ItemList, UpdatedItemList;
     ArrayList<String> GroupList;
 
@@ -54,7 +53,7 @@ public class HomeMainActivity extends AppCompatActivity {
         // fill ItemList with data from file
         FileInputStream fis = null;
         try {
-            fis = openFileInput(Constants.FILENAME);
+            fis = openFileInput(Constants.DeviceFile);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String text;
@@ -119,17 +118,7 @@ public class HomeMainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-/*
-        Button add_device_button = (Button) findViewById(R.id.addDevice);
-        add_device_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(HomeMainActivity.this, AddDeviceActivity.class);
-                Intent intent = new Intent(HomeMainActivity.this, DeviceChoice.class);
-                startActivity(intent);
-            }
-        });
-        */
+
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);

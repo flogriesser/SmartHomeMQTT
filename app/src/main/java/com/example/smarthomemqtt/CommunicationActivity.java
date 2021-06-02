@@ -91,7 +91,7 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
             ArrayList<Item> TempList = new ArrayList<Item>();
             FileInputStream fis = null;
             try {
-                fis = openFileInput(Constants.FILENAME);
+                fis = openFileInput(Constants.DeviceFile);
                 InputStreamReader isr = new InputStreamReader(fis);
                 BufferedReader br = new BufferedReader(isr);
                 String text;
@@ -117,9 +117,10 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
                     }
                 }
             }
+
             FileOutputStream fos = null;
             try {
-                fos = openFileOutput(Constants.FILENAME, MODE_PRIVATE);
+                fos = openFileOutput(Constants.DeviceFile, MODE_PRIVATE);
                 for(Item i: TempList){
                     fos.write(i.getGroup().getBytes());
                     fos.write(",".getBytes());

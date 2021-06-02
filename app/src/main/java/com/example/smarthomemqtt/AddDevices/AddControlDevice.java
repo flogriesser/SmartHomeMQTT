@@ -46,7 +46,7 @@ public class AddControlDevice extends AppCompatActivity {
                 /*TODO Check if device is already saved*/
                 FileInputStream fis = null;
                 try {
-                    fis = openFileInput(Constants.FILENAME);
+                    fis = openFileInput(Constants.DeviceFile);
                     InputStreamReader isr = new InputStreamReader(fis);
                     BufferedReader br = new BufferedReader(isr);
                     String text;
@@ -75,7 +75,7 @@ public class AddControlDevice extends AppCompatActivity {
                     // Save device and groupname to file
                     FileOutputStream fos = null;
                     try {
-                        fos = openFileOutput(Constants.FILENAME, MODE_APPEND);
+                        fos = openFileOutput(Constants.DeviceFile, MODE_APPEND);
                         for (int i = 1; i < 5; i++) {
                             device_text = "Pin " + i;
                             fos.write(group_text.getText().toString().getBytes());

@@ -51,7 +51,7 @@ public class AddDeviceActivity extends AppCompatActivity {
 
                 FileInputStream fis = null;
                 try {
-                    fis = openFileInput(Constants.FILENAME);
+                    fis = openFileInput(Constants.DeviceFile);
                     InputStreamReader isr = new InputStreamReader(fis);
                     BufferedReader br = new BufferedReader(isr);
                     String text;
@@ -80,7 +80,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                     // Save device and groupname to file
                     FileOutputStream fos = null;
                     try {
-                        fos = openFileOutput(Constants.FILENAME, MODE_APPEND);
+                        fos = openFileOutput(Constants.DeviceFile, MODE_APPEND);
                         fos.write(Group.getBytes());
                         fos.write(",".getBytes());
                         fos.write(Device.getBytes());

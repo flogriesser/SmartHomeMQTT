@@ -1,5 +1,9 @@
 package com.example.smarthomemqtt;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,12 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -236,22 +244,50 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
-                /*
-                //TODO: Add a custom topic handling here
-                TextView tvMessage = (TextView) findViewById(R.id.subscribedMsg);
-                if(topic.equals("mycustomtopic1")) {
-                    //Add custom message handling here (if topic = "mycustomtopic1")
+
+
+                if(topic.equals("control-device/settings")){
+                    //TODO Add custom setting handling here
                 }
-                else if(topic.equals("mycustomtopic2")) {
-                    //Add custom message handling here (if topic = "mycustomtopic2")
+                else{
+                    String Group = "Test";
+                    String Device = "TEst";
+                    String Time = "12:00";
+                    String Message = "Message";
+
+                    FileOutputStream fos = null;
+                    try {
+                        fos = openFileOutput(Constants.DeviceFile, MODE_APPEND);
+                        fos.write(Group.getBytes());
+                        fos.write(",".getBytes());
+                        fos.write(Device.getBytes());
+                        fos.write(",".getBytes());
+                        fos.write(Time.getBytes());
+                        fos.write(",".getBytes());
+                        fos.write(Message.getBytes());
+                        fos.write("\n".getBytes());
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (fos != null) {
+                            try {
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    Toast.makeText(getApplicationContext(), "Message arrived", Toast.LENGTH_SHORT).show();
+
+
                 }
-                else {
-                    String msg = "topic: " + topic + "\r\nMessage: " + message.toString() + "\r\n";
-                    tvMessage.append( msg);
-                }
-                 */
-                    //Add custom message handling here (if topic = "mycustomtopic1")
+
+
+
                 Toast.makeText(getApplicationContext(), "Message arrived", Toast.LENGTH_SHORT).show();
+
 
             }
 
