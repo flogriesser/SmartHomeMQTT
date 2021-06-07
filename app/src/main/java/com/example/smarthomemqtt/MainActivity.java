@@ -3,9 +3,11 @@ package com.example.smarthomemqtt;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -26,6 +29,11 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -52,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Generate unique client id for MQTT broker connection
-        Random r = new Random();
-        int i1 = r.nextInt(5000 - 1) + 1;
-        Constants.clientid = "mqtt" + i1;
+        //Random r = new Random();
+        //int i1 = r.nextInt(5000 - 1) + 1;
+        Constants.clientid = "mqtt" + username;
 
 
         // TODO: scrollable > login site (text )
@@ -250,21 +258,34 @@ public class MainActivity extends AppCompatActivity {
                     //TODO Add custom setting handling here
                 }
                 else{
-                    String Group = "Test";
-                    String Device = "TEst";
-                    String Time = "12:00";
-                    String Message = "Message";
+                    //TODO
+                    String[] Topic = topic.split("/");
+                    String Group = "";
+                    String Device = "";
+
+                    if (true) {
+                        Group = Topic[0];
+                        Device = Topic[1];
+                    } else{
+                        Group = "";
+                        Device = topic;
+                    }
+
+
+
+                    String Time = Calendar.getInstance().getTime().toString().split("GMT")[0];
+
 
                     FileOutputStream fos = null;
                     try {
-                        fos = openFileOutput(Constants.DeviceFile, MODE_APPEND);
+                        fos = openFileOutput(Constants.MessageFile, MODE_APPEND);
                         fos.write(Group.getBytes());
                         fos.write(",".getBytes());
                         fos.write(Device.getBytes());
                         fos.write(",".getBytes());
                         fos.write(Time.getBytes());
                         fos.write(",".getBytes());
-                        fos.write(Message.getBytes());
+                        fos.write(message.toString().getBytes());
                         fos.write("\n".getBytes());
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -282,12 +303,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Message arrived", Toast.LENGTH_SHORT).show();
 
 
+
                 }
 
-
-
-                Toast.makeText(getApplicationContext(), "Message arrived", Toast.LENGTH_SHORT).show();
-
+                //Toast.makeText(getApplicationContext(), "Message arrived", Toast.LENGTH_SHORT).show();
 
             }
 

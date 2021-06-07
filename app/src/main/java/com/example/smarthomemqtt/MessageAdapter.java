@@ -29,8 +29,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View itemView = inflater.inflate(R.layout.message_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(itemView);
+        View messageView = inflater.inflate(R.layout.message_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(messageView);
         return viewHolder;
 
     }
@@ -38,14 +38,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Message message = MessageList.get(position);
-        TextView textView = holder.group_text;
-        textView.setText(message.getGroup());
-        TextView textView2 = holder.device_text;
-        textView2.setText(message.getDevice());
-        TextView textView3 = holder.time_text;
-        textView3.setText(message.getTime());
-        TextView textView4 = holder.message_text;
-        textView4.setText(message.getMessage());
+        TextView group_text = holder.group_text;
+        group_text.setText(message.getGroup());
+        TextView device_text = holder.device_text;
+        device_text.setText(message.getDevice());
+        TextView time_text = holder.time_text;
+        time_text.setText(message.getTime());
+        TextView message_text = holder.message_text;
+        message_text.setText(message.getMessage());
 
     }
 

@@ -58,7 +58,7 @@ public class NotificationMessages extends AppCompatActivity {
             String text;
             while ((text = br.readLine()) != null) {
                 String[] line = text.split(",");
-                if(line.length == 4 && !line[1].equals(Constants.ControlDeviceSettings)){
+                if(line.length == 4){
                     MessageList.add(new Message(line[0], line[1], line[2], line[3]));
                     if(!(GroupList.contains(line[0]))){
                         GroupList.add(line[0]);

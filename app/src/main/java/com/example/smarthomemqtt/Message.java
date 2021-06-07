@@ -39,10 +39,10 @@ public class Message {
         this.device_str = device_str;
     }
     public void setTime(@NonNull final String time_str) {
-        this.device_str = time_str;
+        this.time_str = time_str;
     }
     public void setMessage(@NonNull final String message_str) {
-        this.device_str = message_str;
+        this.message_str = message_str;
     }
 
     public String toString() {
