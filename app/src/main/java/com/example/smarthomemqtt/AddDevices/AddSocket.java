@@ -62,7 +62,7 @@ public class AddSocket extends AppCompatActivity {
                     String text;
                     while ((text = br.readLine()) != null) {
                         String[] line = text.split(",");
-                        if(line[0].equals(Group) && line[1].startsWith("Socket")){
+                        if (line[0].equals(Group) && line[1].startsWith("Socket")) {
                             Sockets.add(line[1]);
                         }
                     }
@@ -81,7 +81,9 @@ public class AddSocket extends AppCompatActivity {
                 }
 
                 //Only 3 Sockets added until now
-                if(Sockets.size() < 4) {
+                if (Sockets.size() == 0){
+                    Toast.makeText(getApplicationContext(), "No Control Device with this name", Toast.LENGTH_SHORT).show();
+                }else if(Sockets.size() < 4 && Sockets.size() > 0) {
 
                     for(int i = 0; i < Sockets.size(); i++){
                         if(Sockets.contains(Device)){
