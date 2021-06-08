@@ -11,11 +11,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.smarthomemqtt.CommunicationActivity;
 import com.example.smarthomemqtt.Constants;
 import com.example.smarthomemqtt.HomeMainActivity;
 import com.example.smarthomemqtt.NotificationMessages;
 import com.example.smarthomemqtt.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -23,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 public class AddControlDevice extends AppCompatActivity {
 
@@ -89,6 +93,17 @@ public class AddControlDevice extends AppCompatActivity {
                         fos.write(",".getBytes());
                         fos.write(device_text.getBytes());
                         fos.write("\n".getBytes());
+
+                        //TODO MAX name length!
+                        String MSG = group_text.getText().toString();
+                        String Topic = "control-device/settings";
+                        try {
+                            Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 1, Topic);
+                        } catch (MqttException e) {
+                            e.printStackTrace();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
 
                         Toast.makeText(getApplicationContext(), "Device saved", Toast.LENGTH_SHORT).show();
                     } catch (FileNotFoundException e) {

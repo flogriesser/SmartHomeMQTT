@@ -1,13 +1,7 @@
 package com.example.smarthomemqtt;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -18,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -29,11 +21,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     private void loginButtonListener(){
-        boolean test = false;
         String urlBroker    = broker_text.getText().toString().trim();
         String username     = username_text.getText().toString().trim();
         String password     = password_text.getText().toString().trim();
@@ -77,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 mqttCallback();
             }
             catch (MqttException e) {
+                e.printStackTrace();
             }
         }
         else {
@@ -129,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        boolean tester = false;
         Constants.ConnectionStatus = false;
         Constants.LoggedIn = false;
 
@@ -139,12 +126,12 @@ public class MainActivity extends AppCompatActivity {
         Constants.clientid = "mqtt" + i1;
 
 
-        broker_text = (EditText)findViewById(R.id.loginBrokerUrl);
-        username_text = (EditText)findViewById(R.id.username);
-        password_text = (EditText)findViewById(R.id.password);
-        login_button = (Button) findViewById(R.id.login_button);
-        login_error_text = (TextView) findViewById(R.id.login_error_text);
-        remember_checkbox = (CheckBox) findViewById(R.id.remember_checkbox);
+        broker_text = findViewById(R.id.loginBrokerUrl);
+        username_text = findViewById(R.id.username);
+        password_text = findViewById(R.id.password);
+        login_button = findViewById(R.id.login_button);
+        login_error_text =  findViewById(R.id.login_error_text);
+        remember_checkbox =  findViewById(R.id.remember_checkbox);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
