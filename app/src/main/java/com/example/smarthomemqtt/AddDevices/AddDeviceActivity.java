@@ -46,7 +46,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                 String Group = group_text.getText().toString();
                 device_text = findViewById(R.id.device_text);
                 String Device = device_text.getText().toString();
-                boolean exist = true;
+                boolean DeviceAvailable = true;
                 Switch Subscribe = (Switch) findViewById(R.id.SubscribeButton);
 
                 FileInputStream fis = null;
@@ -59,7 +59,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                         String[] line = text.split(",");
                         if(line[0].equals(Group) &&
                                 line[1].equals(Device)){
-                            exist = false;
+                            DeviceAvailable = false;
                         }
                     }
                 } catch (FileNotFoundException e) {
@@ -76,7 +76,7 @@ public class AddDeviceActivity extends AppCompatActivity {
                     }
                 }
 
-                if(exist) {
+                if(DeviceAvailable) {
                     // Save device and groupname to file
                     FileOutputStream fos = null;
                     try {

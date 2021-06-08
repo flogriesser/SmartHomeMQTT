@@ -6,6 +6,7 @@
     <string name="password">SmartHomeMQTT.password</string>
     <string name="checkbox">SmartHomeMQTT.checkbox</string>
     <string name="ControlDeviceText">Add your Control Device:</string>
+    <string name="AddSocketTipp">Add the socket to this control device:</string>
     <string name="save_device_button">Save Device</string>
     <string name="group_text">Group</string>
     <string name="device_text">Device</string>

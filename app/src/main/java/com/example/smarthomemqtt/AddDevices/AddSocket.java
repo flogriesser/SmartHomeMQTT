@@ -20,20 +20,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.eclipse.paho.client.mqttv3.MqttException;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class AddSocket extends AppCompatActivity {
 
-    public EditText group_text, device_text;
+    public EditText group_text;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_device);
+        setContentView(R.layout.add_socket);
 
         Button save_device_button = (Button) findViewById(R.id.ownDeviceButton);
         save_device_button.setOnClickListener(new View.OnClickListener() {
@@ -41,33 +45,82 @@ public class AddSocket extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 group_text = findViewById(R.id.group_text);
-                device_text = findViewById(R.id.device_text);;
+
+                //Switch if device is already saved (True = exist, False = not
+                //boolean DeviceAvailable = true;
+                ArrayList<String> Sockets = new ArrayList<String>();
 
                 String Group = group_text.getText().toString();
-                String Device = device_text.getText().toString();
+                String Device = Constants.SocketName + "1";
 
                 /*TODO Check if device is already saved*/
-
-                FileOutputStream fos = null;
-
-                EditText comm_message = (EditText) findViewById(R.id.comm_message);
-
-                /*TODO Publish Topic here*/
-                String MSG = "Test";
-                String Topic = Group + "/" + Device;
+                FileInputStream fis = null;
                 try {
-                    Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 1, Topic);
-                    Toast.makeText(AddSocket.this, "Message sent", Toast.LENGTH_SHORT).show();
-                } catch (MqttException e) {
+                    fis = openFileInput(Constants.DeviceFile);
+                    InputStreamReader isr = new InputStreamReader(fis);
+                    BufferedReader br = new BufferedReader(isr);
+                    String text;
+                    while ((text = br.readLine()) != null) {
+                        String[] line = text.split(",");
+                        if(line[0].equals(Group) && line[1].startsWith("Socket")){
+                            Sockets.add(line[1]);
+                        }
+                    }
+                } catch (FileNotFoundException e) {
                     e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
+                } finally {
+                    if (fis != null) {
+                        try {
+                            fis.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
-                //Toast.makeText(AddSocket.this, "Message sent", Toast.LENGTH_SHORT).show();
+                //Only 3 Sockets added until now
+                if(Sockets.size() < 4) {
 
-                Intent intent = new Intent(AddSocket.this, HomeMainActivity.class);
-                startActivity(intent);
+                    for(int i = 0; i < Sockets.size(); i++){
+                        if(Sockets.contains(Device)){
+                            Device = "Socket" + (2 + i);
+                        }
+                    }
+
+                    // Save device and groupname to file
+                    FileOutputStream fos = null;
+                    try {
+                        fos = openFileOutput(Constants.DeviceFile, MODE_APPEND);
+                        fos.write(Group.getBytes());
+                        fos.write(",".getBytes());
+                        fos.write(Device.getBytes());
+                        fos.write("\n".getBytes());
+
+
+                        Toast.makeText(getApplicationContext(), "Device saved", Toast.LENGTH_SHORT).show();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (fos != null) {
+                            try {
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+
+                    Intent intent = new Intent(AddSocket.this, HomeMainActivity.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Device already exists", Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
 
