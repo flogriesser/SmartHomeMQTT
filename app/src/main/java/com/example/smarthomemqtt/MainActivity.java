@@ -1,7 +1,11 @@
 package com.example.smarthomemqtt;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -12,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -125,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
         int i1 = r.nextInt(5000 - 1) + 1;
         Constants.clientid = "mqtt" + i1;
 
+        //Add the Notification Channel
+        createNotificationChannel();
 
         broker_text = findViewById(R.id.loginBrokerUrl);
         username_text = findViewById(R.id.username);
@@ -194,6 +202,22 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             remember_checkbox.setChecked(false);
+        }
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(Constants.ChannelID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 
@@ -289,8 +313,28 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Toast.makeText(getApplicationContext(), "Message arrived", Toast.LENGTH_SHORT).show();
 
+                    // Create an explicit intent for an Activity in your app
+                    Intent intent = new Intent(MainActivity.this, NotificationMessages.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
 
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, Constants.ChannelID)
+                            .setSmallIcon(R.drawable.homeicon)
+                            .setContentTitle(topic)
+                            .setContentText(message.toString())
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            // Set the intent that will fire when the user taps the notification
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true);
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity.this);
 
+                    // notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(Constants.NotificationCounter, builder.build());
+                    if( Constants.NotificationCounter < 10) {
+                        Constants.NotificationCounter++;
+                    }else{
+                        Constants.NotificationCounter = 0;
+                    }
                 }
 
                 //Toast.makeText(getApplicationContext(), "Message arrived", Toast.LENGTH_SHORT).show();
