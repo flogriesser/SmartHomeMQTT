@@ -35,6 +35,11 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.communication);
 
+
+        String Group = getGroupName();        //LOL :D -> Do not touch FIXME better solution
+        String Device = getDeviceName();      //LOL :D -> Do not touch FIXME better solution
+
+
         Button send_msg_button = (Button) findViewById(R.id.send_msg_button);
         Button delete_device_button = (Button) findViewById(R.id.delete_device_button);
         send_msg_button.setOnClickListener(this);
