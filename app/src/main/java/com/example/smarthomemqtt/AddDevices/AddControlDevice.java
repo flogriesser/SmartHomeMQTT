@@ -81,7 +81,7 @@ public class AddControlDevice extends AppCompatActivity {
                     try {
                         fos = openFileOutput(Constants.DeviceFile, MODE_APPEND);
                         for (int i = 1; i < 5; i++) {
-                            device_text = "Pin " + i;
+                            device_text = "Pin" + i;
                             fos.write(group_text.getText().toString().getBytes());
                             fos.write(",".getBytes());
                             fos.write(device_text.getBytes());
@@ -98,7 +98,7 @@ public class AddControlDevice extends AppCompatActivity {
                         String MSG = group_text.getText().toString();
                         String Topic = "control-device/settings";
                         try {
-                            Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 1, Topic);
+                            Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 0, Topic);
                         } catch (MqttException e) {
                             e.printStackTrace();
                         } catch (UnsupportedEncodingException e) {

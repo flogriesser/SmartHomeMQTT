@@ -46,6 +46,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         textView.setText(item.getGroup());
         TextView textView2 = holder.device_text;
         textView2.setText(item.getDevice());
+        holder.setIsRecyclable(false);
 
         // OnClickListener
         edit_item_button.setOnClickListener(new View.OnClickListener() {

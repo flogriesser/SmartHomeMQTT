@@ -1,6 +1,9 @@
 package com.example.smarthomemqtt.AddDevices;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,9 +84,8 @@ public class AddSocket extends AppCompatActivity {
                 }
 
                 //Only 3 Sockets added until now
-                if (Sockets.size() == 0){
-                    Toast.makeText(getApplicationContext(), "No Control Device with this name", Toast.LENGTH_SHORT).show();
-                }else if(Sockets.size() < 4 && Sockets.size() > 0) {
+                //FIXME Should be obsolete with spinner
+                if(Sockets.size() < 4) {
 
                     for(int i = 0; i < Sockets.size(); i++){
                         if(Sockets.contains(Device)){
@@ -148,7 +150,6 @@ public class AddSocket extends AppCompatActivity {
                 return false;
             }
         });
-
 
     }
 }

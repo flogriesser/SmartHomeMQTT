@@ -15,5 +15,6 @@
     <string name="ownDeviceButton">Own Device</string>
     <string name="saveDevice">Save Device</string>
     <string name="saveDeviceToControllDevice">Add 433 MHz Socket to Control Device</string>
-
+    <string name="channel_name">Messages</string>
+    <string name="channel_description">Arriving Messages in SmartHomeMQTT</string>
 </resources>

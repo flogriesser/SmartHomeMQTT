@@ -80,7 +80,7 @@ public class HomeMainActivity extends AppCompatActivity {
             }
         }
         RecyclerViewAdapter = new ItemAdapter(this, ItemList);
-        dashboard_rec_view.setHasFixedSize(true);
+        //dashboard_rec_view.setHasFixedSize(true);
         layout_manager = new LinearLayoutManager(this);
         dashboard_rec_view.setLayoutManager(layout_manager);
         dashboard_rec_view.setAdapter(RecyclerViewAdapter);

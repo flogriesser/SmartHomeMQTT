@@ -82,7 +82,7 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
             String MSG = comm_message.getText().toString().trim();
             String Topic = Group + "/" + Device;
             try {
-                Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 1, Topic);
+                Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 0, Topic);
                 Toast.makeText(CommunicationActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
             } catch (MqttException e) {
                 e.printStackTrace();
@@ -109,6 +109,14 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
                         TempList.add(new Item(line[0], line[1]));
                     }
                 }
+                String Topic = Group + "/" + Device;
+                try {
+                    Constants.pahoMqttClient.unSubscribe(Constants.client, Topic);
+                    Toast.makeText(CommunicationActivity.this, "Unsubscribed from Device: " + Topic, Toast.LENGTH_SHORT).show();
+                } catch (MqttException e) {
+                    e.printStackTrace();
+                }
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
