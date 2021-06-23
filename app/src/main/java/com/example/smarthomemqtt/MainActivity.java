@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -165,12 +164,7 @@ public class MainActivity extends AppCompatActivity {
         //Create listener for MQTT messages.
         mqttCallback();
 
-        login_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginButtonListener();
-            }
-        });
+        login_button.setOnClickListener(v -> loginButtonListener());
 
 
 
@@ -197,12 +191,7 @@ public class MainActivity extends AppCompatActivity {
         username_text.setText(username_str);
         password_text.setText(password_str);
 
-        if(checkbox_str.equals("True")){
-            remember_checkbox.setChecked(true);
-        }
-        else{
-            remember_checkbox.setChecked(false);
-        }
+        remember_checkbox.setChecked(checkbox_str.equals("True"));
     }
 
     private void createNotificationChannel() {
@@ -232,23 +221,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private Runnable RunScheduledTasks = new Runnable() {
-        public void run() {
-            //This method runs in the same thread as the UI.
-            //Check MQTT Connection Status
+    private Runnable RunScheduledTasks = () -> {
+        //This method runs in the same thread as the UI.
+        //Check MQTT Connection Status
 
-            if(Constants.pahoMqttClient.mqttAndroidClient.isConnected() ) {
-                setTitle("Connected");
-                if(!Constants.LoggedIn){
-                    Constants.LoggedIn = true;
-                Intent intent = new Intent(MainActivity.this, HomeMainActivity.class);
-                startActivity(intent);
-                }
-
-                //Constants.pahoMqttClient.publishMessage(Constants.client, testTopic, 1, testTopic);
-            }else{
-                setTitle("Disconneted");
+        if(Constants.pahoMqttClient.mqttAndroidClient.isConnected() ) {
+            setTitle("Connected");
+            if(!Constants.LoggedIn){
+                Constants.LoggedIn = true;
+            Intent intent = new Intent(MainActivity.this, HomeMainActivity.class);
+            startActivity(intent);
             }
+
+            //Constants.pahoMqttClient.publishMessage(Constants.client, testTopic, 1, testTopic);
+        }else{
+            setTitle("Disconnected");
         }
     };
 

@@ -21,7 +21,6 @@ public class PahoMqttClient {
 
     private static final String TAG = "PahoMqttClient";
     public MqttAndroidClient mqttAndroidClient;
-    private boolean connected;
 
     public MqttAndroidClient getMqttClient(Context context, String brokerUrl, String clientId, String clientUn, String clientPw) {
         mqttAndroidClient = new MqttAndroidClient(context, brokerUrl, clientId);
@@ -34,7 +33,7 @@ public class PahoMqttClient {
                 myMqttcnxoptions.setPassword(clientPw.toCharArray());
             }
             IMqttToken token = mqttAndroidClient.connect(myMqttcnxoptions);
-            connected = mqttAndroidClient.isConnected();
+            boolean connected = mqttAndroidClient.isConnected();
             //IMqttToken token = mqttAndroidClient.connect(getMqttConnectionOption(clientUn,clientPw));
             token.setActionCallback(new IMqttActionListener() {
                 @Override

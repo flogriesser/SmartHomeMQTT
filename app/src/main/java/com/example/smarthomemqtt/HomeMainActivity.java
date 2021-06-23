@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -42,11 +41,11 @@ public class HomeMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_main);
 
-        dashboard_rec_view = (RecyclerView)findViewById(R.id.connectionStatus);
-        spinner = (Spinner)findViewById(R.id.spinner);
+        dashboard_rec_view = findViewById(R.id.connectionStatus);
+        spinner = findViewById(R.id.spinner);
 
-        ItemList = new ArrayList<Item>();
-        GroupList = new ArrayList<String>();
+        ItemList = new ArrayList<>();
+        GroupList = new ArrayList<>();
         GroupList.add("All");
 
 
@@ -87,21 +86,21 @@ public class HomeMainActivity extends AppCompatActivity {
         dashboard_rec_view.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
 
-        ArrayAdapter<String> StringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, GroupList);
+        ArrayAdapter<String> StringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, GroupList);
         StringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(StringArrayAdapter);
 
         try {
-            Constants.pahoMqttClient.subscribe(Constants.client, "control-device/settings", (int) 1);
+            Constants.pahoMqttClient.subscribe(Constants.client, "control-device/settings", 1);
         } catch (MqttException e) {
             e.printStackTrace();
         }
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                UpdatedItemList = new ArrayList<Item>();
+                UpdatedItemList = new ArrayList<>();
                 if (parent.getSelectedItem().toString().equals("All")) {
                     RecyclerViewAdapter.updateItemList(ItemList);
                 } else {
@@ -121,7 +120,7 @@ public class HomeMainActivity extends AppCompatActivity {
 
 
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

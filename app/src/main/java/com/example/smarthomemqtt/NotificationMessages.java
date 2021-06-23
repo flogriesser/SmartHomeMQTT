@@ -2,13 +2,11 @@ package com.example.smarthomemqtt;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smarthomemqtt.AddDevices.DeviceChoice;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -41,11 +37,11 @@ public class NotificationMessages extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification);
 
-        notification_rec_view = (RecyclerView)findViewById(R.id.connectionStatus);
-        spinner = (Spinner)findViewById(R.id.spinner);
+        notification_rec_view = findViewById(R.id.connectionStatus);
+        spinner = findViewById(R.id.spinner);
 
-        MessageList = new ArrayList<Message>();
-        GroupList = new ArrayList<String>();
+        MessageList = new ArrayList<>();
+        GroupList = new ArrayList<>();
         GroupList.add("All");
 
 
@@ -86,16 +82,16 @@ public class NotificationMessages extends AppCompatActivity {
         notification_rec_view.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
 
-        ArrayAdapter<String> StringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, GroupList);
+        ArrayAdapter<String> StringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, GroupList);
         StringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(StringArrayAdapter);
 
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                UpdatedMessageList = new ArrayList<Message>();
+                UpdatedMessageList = new ArrayList<>();
                 if (parent.getSelectedItem().toString().equals("All")) {
                     RecyclerViewAdapter.updateItemList(MessageList);
                 } else {
@@ -118,22 +114,19 @@ public class NotificationMessages extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
-                switch (item.getItemId()) {
-                    case R.id.add_NEW_Device:
-                        Intent menuIntent = new Intent(NotificationMessages.this, DeviceChoice.class);
-                        startActivity(menuIntent);
-                        break;
-                    case R.id.Home:
-                        Intent Home = new Intent(NotificationMessages.this, HomeMainActivity.class);
-                        startActivity(Home);
-                        break;
-                }
-                return false;
+            switch (item.getItemId()) {
+                case R.id.add_NEW_Device:
+                    Intent menuIntent = new Intent(NotificationMessages.this, DeviceChoice.class);
+                    startActivity(menuIntent);
+                    break;
+                case R.id.Home:
+                    Intent Home = new Intent(NotificationMessages.this, HomeMainActivity.class);
+                    startActivity(Home);
+                    break;
             }
+            return false;
         });
         
         

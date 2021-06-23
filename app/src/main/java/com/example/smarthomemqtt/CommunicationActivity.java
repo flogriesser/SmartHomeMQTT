@@ -40,14 +40,14 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
         String Device = getDeviceName();      //LOL :D -> Do not touch FIXME better solution
 
 
-        Button send_msg_button = (Button) findViewById(R.id.send_msg_button);
-        Button delete_device_button = (Button) findViewById(R.id.delete_device_button);
+        Button send_msg_button = findViewById(R.id.send_msg_button);
+        Button delete_device_button = findViewById(R.id.delete_device_button);
         send_msg_button.setOnClickListener(this);
         delete_device_button.setOnClickListener(this);
 
 
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -76,13 +76,13 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
         String Device = getDeviceName();
 
         if(v.getId() == R.id.send_msg_button) {
-            EditText comm_message = (EditText) findViewById(R.id.comm_message);
+            EditText comm_message =  findViewById(R.id.comm_message);
 
             /*TODO Publish Topic here*/
             String MSG = comm_message.getText().toString().trim();
             String Topic = Group + "/" + Device;
             try {
-                Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 0, Topic);
+                Constants.pahoMqttClient.publishMessage(Constants.client, MSG,  0, Topic);
                 Toast.makeText(CommunicationActivity.this, "Message sent", Toast.LENGTH_SHORT).show();
             } catch (MqttException e) {
                 e.printStackTrace();
@@ -93,7 +93,7 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
         }
         else if(v.getId() == R.id.delete_device_button){
             //delete item and write new data to file
-            ArrayList<Item> TempList = new ArrayList<Item>();
+            ArrayList<Item> TempList = new ArrayList<>();
             FileInputStream fis = null;
             try {
                 fis = openFileInput(Constants.DeviceFile);
@@ -165,7 +165,7 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
 
             group_text = getIntent().getStringExtra("Group");
 
-            TextView group = (TextView) findViewById(R.id.comm_group);
+            TextView group = findViewById(R.id.comm_group);
             group.setText(group_text);
             return group_text;
         }
@@ -178,7 +178,7 @@ public class CommunicationActivity extends AppCompatActivity implements View.OnC
 
             device_text = getIntent().getStringExtra("Device");
 
-            TextView device = (TextView) findViewById(R.id.comm_device);
+            TextView device = findViewById(R.id.comm_device);
             device.setText(device_text);
             return device_text;
         }

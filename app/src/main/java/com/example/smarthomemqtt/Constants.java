@@ -16,6 +16,8 @@ public class Constants {
 
     public static int NotificationCounter = 0;
 
+    public static int ControlDeviceCounter = 0;
+
 
     public static final String ChannelID = "1";
 

@@ -2,7 +2,6 @@ package com.example.smarthomemqtt;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import static java.sql.DriverManager.println;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
@@ -34,8 +32,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         View itemView = inflater.inflate(R.layout.dashboard_item, parent, false);
-        ViewHolder viewHolder = new ViewHolder(itemView);
-        return viewHolder;
+        return new ViewHolder(itemView);
 
     }
 
@@ -49,14 +46,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         holder.setIsRecyclable(false);
 
         // OnClickListener
-        edit_item_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, CommunicationActivity.class);
-                intent.putExtra("Group", item.getGroup());
-                intent.putExtra("Device", item.getDevice());
-                mContext.startActivity(intent);
-            }
+        edit_item_button.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, CommunicationActivity.class);
+            intent.putExtra("Group", item.getGroup());
+            intent.putExtra("Device", item.getDevice());
+            mContext.startActivity(intent);
         });
     }
 
@@ -76,9 +70,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            group_text = (TextView) itemView.findViewById(R.id.group_name);
-            device_text = (TextView) itemView.findViewById(R.id.device_name);
-            edit_item_button = (Button) itemView.findViewById(R.id.edit_item_button);
+            group_text =  itemView.findViewById(R.id.group_name);
+            device_text =  itemView.findViewById(R.id.device_name);
+            edit_item_button =  itemView.findViewById(R.id.edit_item_button);
         }
     }
 }

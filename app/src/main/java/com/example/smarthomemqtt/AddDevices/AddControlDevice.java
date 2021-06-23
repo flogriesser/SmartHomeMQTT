@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.smarthomemqtt.CommunicationActivity;
 import com.example.smarthomemqtt.Constants;
 import com.example.smarthomemqtt.HomeMainActivity;
 import com.example.smarthomemqtt.NotificationMessages;
@@ -38,7 +37,7 @@ public class AddControlDevice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_controlldevice);
 
-        Button save_device_button = (Button) findViewById(R.id.ownDeviceButton);
+        Button save_device_button =  findViewById(R.id.ownDeviceButton);
         save_device_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -76,7 +75,7 @@ public class AddControlDevice extends AppCompatActivity {
 
 
                 if(exist) {
-                    // Save device and groupname to file
+                    // Save device and GroupName to file
                     FileOutputStream fos = null;
                     try {
                         fos = openFileOutput(Constants.DeviceFile, MODE_APPEND);
@@ -96,15 +95,15 @@ public class AddControlDevice extends AppCompatActivity {
 
                         //TODO MAX name length!
                         String MSG = group_text.getText().toString();
-                        String Topic = "control-device/settings";
+                        String Topic = "control-device"+ Constants.ControlDeviceCounter+"/settings";
                         try {
-                            Constants.pahoMqttClient.publishMessage(Constants.client, MSG, (int) 0, Topic);
+                            Constants.pahoMqttClient.publishMessage(Constants.client, MSG, 0, Topic);
                         } catch (MqttException e) {
                             e.printStackTrace();
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
-
+                        Constants.ControlDeviceCounter++;
                         Toast.makeText(getApplicationContext(), "Device saved", Toast.LENGTH_SHORT).show();
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
@@ -129,7 +128,7 @@ public class AddControlDevice extends AppCompatActivity {
         });
 
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
