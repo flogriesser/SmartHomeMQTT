@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">SmartHomeMQTT</string>
+    <string name="connectionStatus">Disconnected</string>
+    <string name="broker_url">SmartHomeMQTT.broker</string>
+    <string name="username">SmartHomeMQTT.username</string>
+    <string name="password">SmartHomeMQTT.password</string>
+    <string name="checkbox">SmartHomeMQTT.checkbox</string>
+    <string name="ControlDeviceText">Add your Control Device:</string>
+    <string name="AddSocketTipp">Add the socket to this control device:</string>
+    <string name="save_device_button">Save Device</string>
+    <string name="group_text">Group</string>
+    <string name="device_text">Device</string>
+    <string name="deviceQuestion">What kind of device do you want to add?</string>
+    <string name="save_ControlDeviceButton">New Control Device</string>
+    <string name="ownDeviceButton">Own Device</string>
+    <string name="saveDevice">Save Device</string>
+    <string name="saveDeviceToControllDevice">Add 433 MHz Socket to Control Device</string>
+    <string name="channel_name">Messages</string>
+    <string name="channel_description">Arriving Messages in SmartHomeMQTT</string>
 </resources>
